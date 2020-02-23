@@ -1,9 +1,9 @@
 module Display
     ( displayDirectory
+    , displayError
     ) where
 
 import System.Console.ANSI
-import System.IO (hPutStrLn, stderr)
 
 displayDirectory :: String -> IO ()
 displayDirectory dir = do
@@ -16,4 +16,4 @@ displayDirectory dir = do
 displayError :: String -> IO ()
 displayError err = do
     setSGR [ SetColor Foreground Vivid Red ]
-    hPutStrLn stderr err
+    putStrLn err

@@ -7,7 +7,6 @@ import Cli
 import System.Environment (getEnv, getArgs)
 import System.Console.ANSI
 import Data.List
-import System.IO (hPutStrLn, stderr)
 import System.Directory (listDirectory, doesDirectoryExist)
 import Control.Monad
 
@@ -20,7 +19,7 @@ main = do
     case parseArgs args of
       (Left ShowFullPath) -> showFullPath
       (Left (SearchPath search)) -> searchPath search
-      (Right err) -> hPutStrLn stderr err
+      (Right err) -> displayError err
 
 
 showFullPath :: IO ()
@@ -40,7 +39,7 @@ searchPath search = do
 
     case result of
       (Just result) -> displayDirectory result
-      Nothing -> putStrLn "Fr4ick off"
+      Nothing -> displayError "That command doesn't exist on the path"
 
 
 findPathDirectory :: String -> [String] -> IO (Maybe String)
